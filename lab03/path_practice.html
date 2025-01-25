@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"
+        name="viewport" content="width=device-width, initial-scale=1">
+        <title>IST 263 - Unit 3</title>
+        <style>
+            .collapsible {
+              background-color: #338992;
+              color: white;
+              cursor: pointer;
+              padding: 18px;
+              width: 100%;
+              border: none;
+              text-align: left;
+              outline: none;
+              font-size: 15px;
+            }
+            
+            .active, .collapsible:hover {
+              background-color: #236168;
+            }
+            
+            .content {
+              padding: 0 18px;
+              display: none;
+              overflow: hidden;
+              background-color: #f1f1f1;
+            }
+
+            .title {
+                color: #338992;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 class="title">Paths Practice</h1>
+        <p><strong>Question 1.  </strong>I am coding in the "path_practice.html" file, and I want to display an image, "cupcakes.jpg", that is up one level in the Images folder.  How to I reference that image?</p>
+        <img src="../images/path1_example.png">
+        <br>
+        <br>
+        <img src="../images/path1_example2.png">
+        <br>
+        <br>
+
+
+    <button type="button" class="collapsible">Display Answer</button>
+        <div class="content">
+            <h2><xmp><img src="../images/cupcakes.jpg"></xmp></h2>
+            <img src="../images/cupcakes.jpg">
+        </div>
+        <br>
+        <br>
+
+        <p><strong>Question 2.  </strong>We are still coding in the "path_practice.html" file, and now we want to display an image, "cupcakes.jpg", that is up one level in the Images folder.  How to I reference that image?</p>
+        <img src="../images/path2_example.png">
+        <br>
+        <br>
+        <img src="../images/path2_example2.png">
+        <br>
+        <br>
+
+    <button type="button" class="collapsible">Display Answer</button>
+        <div class="content">
+            <h2><xmp><img src="folder_a/images/travel-logo.png"></xmp></h2>
+            <img src="folder_a/images/travel-logo.png">
+        </div>
+        <br>
+        <br>
+
+        <p><strong>Question 3.  </strong>We are still coding in the "path_practice.html" file in our lab03 folder, but now we want to link to a page in our lab02 folder, "bio.html".  What is the path to link to this file?</p>
+        <img src="../images/path3_example.png">
+        <br>
+        <br>
+
+        <button type="button" class="collapsible">Display Answer</button>
+        <div class="content">
+            <h2><xmp><a href="../lab02/bio.html"></xmp></h2>
+                <p>This one also works:</p>
+            <h2><xmp><a href="../../ist263/lab02/bio.html"></xmp></h2>
+            <a href="../lab02/bio.html">I link to bio.html in lab02</a>
+        </div>
+        <br>
+        <br>
+
+
+        <script>
+            var coll = document.getElementsByClassName("collapsible");
+            var i;
+            
+            for (i = 0; i < coll.length; i++) {
+              coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                  content.style.display = "none";
+                } else {
+                  content.style.display = "block";
+                }
+              });
+            }
+            </script>
+</body>
+</html>
