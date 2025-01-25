@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IST 263 Student Matching</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 50%;
+        margin: 20px auto;
+      }
+      th,
+      td {
+        border: 1px solid darkslategray;
+        padding: 8px;
+        text-align: center;
+        background-color: rgb(226, 226, 206);
+      }
+      th {
+        background-color: #6a9eb5;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 style="text-align: center">IST 263 Student Matching</h1>
+    <div style="text-align: center">
+      <button onclick="generatePairs()">Generate Matches</button>
+    </div>
+    <table id="pairsTable">
+      <thead>
+        <tr>
+          <th>Group</th>
+          <th>Students</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <script>
+      const students = [
+        "Victoria",
+        "Sebastian",
+        "Malachi",
+        "Taylor",
+        "Sarah Chin",
+        "Matias",
+        "Andre",
+        "Ryann",
+        "Robert",
+        "Mary",
+        "Joseph",
+        "Andrew",
+        "Luisana",
+        "Griffin",
+        "Nick",
+        "Coby",
+        "Joyce",
+        "Tina",
+        "Chad",
+        "Hayden",
+        'Siyu "Leanna"',
+        "Sarah Wiemeyer",
+      ];
+
+      function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+      }
+
+      function generatePairs() {
+        // Shuffle students array
+        const shuffledStudents = [...students];
+        shuffleArray(shuffledStudents);
+
+        const pairs = [];
+
+        // Create groups of 2 and handle odd number case
+        while (shuffledStudents.length > 3) {
+          pairs.push([shuffledStudents.pop(), shuffledStudents.pop()]);
+        }
+
+        // Handle the remaining students
+        pairs.push(shuffledStudents);
+
+        displayPairs(pairs);
+      }
+
+      function displayPairs(pairs) {
+        const tableBody = document.querySelector("#pairsTable tbody");
+        tableBody.innerHTML = "";
+
+        pairs.forEach((pair, index) => {
+          const row = document.createElement("tr");
+
+          const groupCell = document.createElement("td");
+          groupCell.textContent = `Group ${index + 1}`;
+          row.appendChild(groupCell);
+
+          const studentsCell = document.createElement("td");
+          studentsCell.textContent = pair.join(", ");
+          row.appendChild(studentsCell);
+
+          tableBody.appendChild(row);
+        });
+      }
+    </script>
+  </body>
+</html>
