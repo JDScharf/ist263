@@ -1,0 +1,49 @@
+nav {background-color: aqua; padding: 1%;}
+
+.top-section {
+    display: flex;
+    background-color: aquamarine;
+    margin: 40px;
+    border-radius: 20px;
+}
+.bottom-section {
+    display: flex;
+    background-color: aquamarine;
+    margin: 40px;
+    border-radius: 20px;
+}
+.contact-info, .online-info, .contact-form, .map-section {
+    padding: 20px;
+}
+
+.skills-card {justify-content: space-around;}
+
+th, td {
+    border: 1px solid #0a0909;
+  }
+
+/* .evenrow {
+    background-color: lavenderblush;
+} */
+
+tr:nth-child(even) {
+  background-color: #e94b11;
+}
+
+.header-img {max-width: 100%}
+
+main {font-size: medium;}
+nav a {color: #ffffff;}
+nav a:hover {background-color: #ffbf00;}
+footer {
+    text-align: center;
+}
+
+@media (max-width: 800px) {
+  /*CSS rules for small screens */
+  nav a {width: 100%;
+        display: block;
+        margin: auto;
+        text-align: center;}
+  nav span {display: none}
+}

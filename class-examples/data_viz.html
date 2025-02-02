@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ArcGIS and D3 Integration</title>
+  <link rel="stylesheet" href="https://js.arcgis.com/4.27/esri/themes/light/main.css">
+  <script src="https://js.arcgis.com/4.26/"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="data_viz.js"></script>
+  <style>
+    #viewDiv {
+      height: 70%;
+      width: 100%;
+    }
+    #chartDiv {
+      height: 30%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    svg {
+      background-color: #340b0b;
+    }
+  </style>
+</head>
+<body>
+  <div id="viewDiv"></div>
+  <div id="chartDiv"></div>
+  <script>

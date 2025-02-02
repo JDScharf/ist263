@@ -1,0 +1,40 @@
+var sbl = $feature.SBL
+var codesFSet = FeatureSetById($map, "1939d564af8-layer-4", ['SBL', 'complaint_type_name', 'status_type_name', 'violation_date'], false)
+var filteredFSet = Filter(codesFSet, 'SBL = @sbl')
+
+// Initialize HTML table with headers
+var html = "<figure class='table'><table><tbody>"
+html += "<tr style='background-color: #a9fff2;'>"
+html += "<th style='border: 1px solid #0d0733; padding: 8px;'>Complaint Type</th>"
+html += "<th style='border: 1px solid #0d0733; padding: 8px;'>Status Type</th>"
+html += "<th style='border: 1px solid #0d0733; padding: 8px;'>Violation Date</th>"
+html += "</tr>"
+
+// Iterate over the filtered features and add rows to the table
+for (var item in filteredFSet) {
+    var complaint = item['complaint_type_name']
+    var status = item['status_type_name']
+    var daytime = Text(feature['violation_date'], "YYYY-MM-DD")
+    html += "<tr>"
+    html += "<td style='border: 1px solid #60074b; padding: 8px;'>" + complaint + "</td>"
+    html += "<td style='border: 1px solid #60074b; padding: 8px;'>" + status + "</td>"
+    html += "<td style='border: 1px solid #60074b; padding: 8px;'>" + daytime + "</td>"
+    html += "</tr>"
+}
+
+// Close the HTML table
+html += "</tbody></table></figure>"
+
+// Return the HTML
+return html
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Jason Scharf Portfolio</title>
+    </head>
+    <body>
+<figure class='table'><table><tr style='background-color: #f2f2f2;'><th style='border: 1px solid #ddd; padding: 8px;'>Complaint Type</th><th style='border: 1px solid #ddd; padding: 8px;'>Status Type</th><th style='border: 1px solid #ddd; padding: 8px;'>Violation Date</th></tr><tr><td style='border: 1px solid #ddd; padding: 8px;'>Property Maintenance-Int</td><td style='border: 1px solid #ddd; padding: 8px;'>Open</td><td style='border: 1px solid #ddd; padding: 8px;'>2024-06-05</td></tr><tr><td style='border: 1px solid #ddd; padding: 8px;'>Property Maintenance-Int</td><td style='border: 1px solid #ddd; padding: 8px;'>Open</td><td style='border: 1px solid #ddd; padding: 8px;'>2024-06-05</td></tr><tr><td style='border: 1px solid #ddd; padding: 8px;'>Property Maintenance-Int</td><td style='border: 1px solid #ddd; padding: 8px;'>Open</td><td style='border: 1px solid #ddd; padding: 8px;'>2024-06-05</td></tr><tr><td style='border: 1px solid #ddd; padding: 8px;'>Property Maintenance-Int</td><td style='border: 1px solid #ddd; padding: 8px;'>Open</td><td style='border: 1px solid #ddd; padding: 8px;'>2024-06-05</td></tr><tr><td style='border: 1px solid #ddd; padding: 8px;'>Property Maintenance-Int</td><td style='border: 1px solid #ddd; padding: 8px;'>Open</td><td style='border: 1px solid #ddd; padding: 8px;'>2024-06-05</td></tr><tr><td style='border: 1px solid #ddd; padding: 8px;'>Rental Registry</td><td style='border: 1px solid #ddd; padding: 8px;'>Open</td><td style='border: 1px solid #ddd; padding: 8px;'>2024-05-08</td></tr><tr><td style='border: 1px solid #ddd; padding: 8px;'>Property Maintenance-Int</td><td style='border: 1px solid #ddd; padding: 8px;'>Open</td><td style='border: 1px solid #ddd; padding: 8px;'>2024-06-07</td></tr><tr><td style='border: 1px solid #ddd; padding: 8px;'>Property Maintenance-Int</td><td style='border: 1px solid #ddd; padding: 8px;'>Open</td><td style='border: 1px solid #ddd; padding: 8px;'>2024-06-07</td></tr><tr><td style='border: 1px solid #ddd; padding: 8px;'>Property Maintenance-Int</td><td style='border: 1px solid #ddd; padding: 8px;'>Open</td><td style='border: 1px solid #ddd; padding: 8px;'>2024-06-07</td></tr><tr><td style='border: 1px solid #ddd; padding: 8px;'>Property Maintenance-Int</td><td style='border: 1px solid #ddd; padding: 8px;'>Open</td><td style='border: 1px solid #ddd; padding: 8px;'>2024-06-07</td></tr><tr><td style='border: 1px solid #ddd; padding: 8px;'>Property Maintenance-Int</td><td style='border: 1px solid #ddd; padding: 8px;'>Open</td><td style='border: 1px solid #ddd; padding: 8px;'>2024-06-07</td></tr><tr><td style='border: 1px solid #ddd; padding: 8px;'>Property Maintenance-Int</td><td style='border: 1px solid #ddd; padding: 8px;'>Open</td><td style='border: 1px solid #ddd; padding: 8px;'>2024-06-07</td></tr><tr><td style='border: 1px solid #ddd; padding: 8px;'>Property Maintenance-Int</td><td style='border: 1px solid #ddd; padding: 8px;'>Open</td><td style='border: 1px solid #ddd; padding: 8px;'>2024-06-07</td></tr><tr><td style='border: 1px solid #ddd; padding: 8px;'>Property Maintenance-Int</td><td style='border: 1px solid #ddd; padding: 8px;'>Open</td><td style='border: 1px solid #ddd; padding: 8px;'>2024-06-05</td></tr><tr><td style='border: 1px solid #ddd; padding: 8px;'>Property Maintenance-Int</td><td style='border: 1px solid #ddd; padding: 8px;'>Open</td><td style='border: 1px solid #ddd; padding: 8px;'>2024-06-05</td></tr><tr><td style='border: 1px solid #ddd; padding: 8px;'>Property Maintenance-Int</td><td style='border: 1px solid #ddd; padding: 8px;'>Open</td><td style='border: 1px solid #ddd; padding: 8px;'>2024-06-05</td></tr><tr><td style='border: 1px solid #ddd; padding: 8px;'>Property Maintenance-Int</td><td style='border: 1px solid #ddd; padding: 8px;'>Open</td><td style='border: 1px solid #ddd; padding: 8px;'>2024-06-05</td></tr><tr><td style='border: 1px solid #ddd; padding: 8px;'>Property Maintenance-Int</td><td style='border: 1px solid #ddd; padding: 8px;'>Open</td><td style='border: 1px solid #ddd; padding: 8px;'>2024-06-05</td></tr><tr><td style='border: 1px solid #ddd; padding: 8px;'>Property Maintenance-Int</td><td style='border: 1px solid #ddd; padding: 8px;'>Open</td><td style='border: 1px solid #ddd; padding: 8px;'>2024-06-05</td></tr><tr><td style='border: 1px solid #ddd; padding: 8px;'>Property Maintenance-Int</td><td style='border: 1px solid #ddd; padding: 8px;'>Open</td><td style='border: 1px solid #ddd; padding: 8px;'>2024-06-05</td></tr></table></figure>
+</body>
