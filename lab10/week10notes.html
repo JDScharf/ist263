@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width", initial-scale="1">
         <title>Unit 10 Notes Responsive Design</title>
         <style>
             body {font-family: Arial, Helvetica, sans-serif;}
@@ -11,6 +12,31 @@
             .row1 div {
                 padding: 40px;
             }
+
+            @media screen and (max-width: 800px) {
+                .banner  {
+                display: none;
+                }
+            }
+
+            @media screen and (min-width: 800px) {
+                h1  {
+                background-color: purple;
+                font-size: 60px;
+                }
+            }
+
+            @media screen and (orientation: landscape) {
+                .image1 {
+                    width: 200%;
+                    }
+                }
+
+            
+
+
+
+            
         </style>
     </head>
     <body>
@@ -26,7 +52,7 @@
         <!-- this row is coming from https://www.syracuse.edu/about/ -->
         <div class="row1">
             <div class="box1">
-                <img src="https://laferger.github.io/ist263/images/eighty-percent-numeral-800x533.png" alt="80 percent"><br>
+                <img src="https://laferger.github.io/ist263/images/eighty-percent-numeral-800x533.png" alt="80 percent" class="image1"><br>
                 <p>80% of Syracuse University students received some form of financial support totaling more than $414 million (2019-2020 data)</p>
             </div>
             <div class="box2">
