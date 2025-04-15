@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Week 11 API Calls</title>
+    <script>
+
+      const cuseTempAPI =
+        "https://api.weather.gov/gridpoints/BGM/52,99/forecast";
+      function getSyracuseTemp() {
+        fetch(cuseTempAPI)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data);
+            time = Date(data.properties.periods[0].startTime);
+            temp = data.properties.periods[0].temperature;
+            forecast = data.properties.periods[0].detailedForecast;
+            icon = data.properties.periods[0].icon;
+            console.log(icon)
+            document.getElementById("icon").setAttribute("src", icon);
+            document.getElementById("time").innerHTML = time;
+            document.getElementById("temp").innerHTML = temp + "°F";
+            document.getElementById("forecast").innerHTML = forecast;
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+
+
+      function getCurrentDate() {
+        const time = new Date(); // Current date and time
+        const formattedDate = time.toLocaleDateString("en-US"); // MM/DD/YYYY format
+        document.getElementById("date").innerHTML = formattedDate;
+        console.log(formattedDate);
+
+      }
+
+    </script>
+    <style>
+    </style>
+  </head>
+
+  <body>
+    <button onclick="getSyracuseTemp()">Get Syracuse Weather</button>
+    <h2 id="cuse-weather"></h2>
+    <div>
+      <img id="icon" src="" />
+      <p id="time"></p>
+      <p id="temp"></p>
+      <p id="forecast"></p>
+    </div>
+
+    <button onclick="getCurrentDate()">Get Today's Date</button>
+    <p id="date"></p>
+  </body>
+</html>
