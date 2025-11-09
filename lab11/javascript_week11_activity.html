@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Chain Story</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            min-height: 600px;
+        }
+        
+        .editor-section {
+            padding: 30px;
+            background: #f8f9fa;
+            border-right: 2px solid #e0e0e0;
+        }
+        
+        .output-section {
+            padding: 30px;
+            background: white;
+        }
+        
+        h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .icon {
+            font-size: 1.3em;
+        }
+        
+        .person-section {
+            margin-bottom: 25px;
+        }
+        
+        .person-label {
+            background: #667eea;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            resize: vertical;
+            min-height: 100px;
+            transition: border-color 0.3s;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        #output {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            min-height: 400px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .output-line {
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            background: white;
+            border-left: 4px solid #667eea;
+            border-radius: 4px;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .error {
+            background: #fee;
+            border-left-color: #f44336;
+            color: #c62828;
+            font-weight: bold;
+        }
+        
+        .instructions {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2196F3;
+        }
+        
+        .instructions p {
+            margin: 5px 0;
+            color: #1565c0;
+            font-size: 0.95em;
+        }
+        
+        @media (max-width: 900px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            .editor-section {
+                border-right: none;
+                border-bottom: 2px solid #e0e0e0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>IST 263 Interactive JavaScript Activity</h1>
+            <p>Build your story together - one person at a time.</p>
+        </div>
+        
+        <div class="content">
+            <div class="editor-section">
+                <h2><span class="icon">✏️</span>Your Code</h2>
+                
+                <div class="instructions">
+                    <p><strong>How to use:</strong></p>
+                    <p>• Each person writes their code in their section below</p>
+                    <p>• Use <code>output("message")</code> to display text</p>
+                    <p>• Click "Run Code" when ready to see your story!</p>
+                </div>
+                
+                <div class="person-section">
+                    <div class="person-label">👤 Person 1: Set the Scene</div>
+                    <textarea id="person1" placeholder="// Declare your variables and introduce the story
+let money = 20;
+let hunger = 8;
+output('Welcome to the Snack Shop!');"></textarea>
+                </div>
+                
+                <div class="person-section">
+                    <div class="person-label">👤 Person 2: First Decision</div>
+                    <textarea id="person2" placeholder="// Write your first if/else statement
+if (money >= 5) {
+    output('You bought a sandwich!');
+    money = money - 5;
+    hunger = hunger - 3;
+} else {
+    output('Not enough money.');
+}"></textarea>
+                </div>
+                
+                <div class="person-section">
+                    <div class="person-label">👤 Person 3: Second Decision</div>
+                    <textarea id="person3" placeholder="// Write another if/else statement
+if (hunger > 5) {
+    output('You are still hungry!');
+} else {
+    output('You feel full.');
+}"></textarea>
+                </div>
+                
+                <div class="person-section">
+                    <div class="person-label">👤 Person 4: The Ending</div>
+                    <textarea id="person4" placeholder="// Write the ending
+if (money > 0 && hunger <= 3) {
+    output('Perfect day!');
+} else {
+    output('Hope you had fun!');
+}"></textarea>
+                </div>
+                
+                <div class="button-container">
+                    <button onclick="runCode()">▶️ Run Code</button>
+                </div>
+            </div>
+            
+            <div class="output-section">
+                <h2><span class="icon">📺</span>Story Output</h2>
+                <div id="output">
+                    <div style="text-align: center; padding: 40px; color: #999;">
+                        <p style="font-size: 3em;">🎬</p>
+                        <p style="font-size: 1.2em;">Your story will appear here!</p>
+                        <p style="margin-top: 10px;">Click "Run Code" to start</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function runCode() {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = '';
+            
+            // Get all code from textareas
+            const code1 = document.getElementById('person1').value;
+            const code2 = document.getElementById('person2').value;
+            const code3 = document.getElementById('person3').value;
+            const code4 = document.getElementById('person4').value;
+            
+            // Combine all code
+            const fullCode = code1 + '\n' + code2 + '\n' + code3 + '\n' + code4;
+            
+            // Create output function
+            function output(message) {
+                const line = document.createElement('div');
+                line.className = 'output-line';
+                line.textContent = message;
+                outputDiv.appendChild(line);
+            }
+            
+            // Try to run the code
+            try {
+                eval(fullCode);
+                
+                // If no output was generated
+                if (outputDiv.children.length === 0) {
+                    output('✅ Code ran successfully! (But no output was generated)');
+                }
+            } catch (error) {
+                const errorLine = document.createElement('div');
+                errorLine.className = 'output-line error';
+                errorLine.textContent = '❌ Error: ' + error.message;
+                outputDiv.appendChild(errorLine);
+            }
+        }
+    </script>
+</body>
+</html>
