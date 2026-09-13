@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Culture Map — Team Scenarios</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0b1e2d;
+        --panel: #122a3c;
+        --panel-2: #16334a;
+        --gold: #c9a24b;
+        --gold-dim: rgba(201, 162, 75, 0.35);
+        --teal: #5fc3b8;
+        --text: #ece5d3;
+        --text-muted: #8ea3af;
+        --border: rgba(201, 162, 75, 0.28);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: var(--bg);
+        color: var(--text);
+        font-family: "IBM Plex Sans", sans-serif;
+        background-image: repeating-linear-gradient(
+            0deg,
+            transparent 0,
+            transparent 79px,
+            rgba(201, 162, 75, 0.055) 80px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            transparent 0,
+            transparent 79px,
+            rgba(201, 162, 75, 0.055) 80px
+          ),
+          radial-gradient(
+            circle at 82% -6%,
+            rgba(95, 195, 184, 0.16),
+            transparent 42%
+          );
+      }
+
+      .wrap {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 32px 28px 40px;
+      }
+
+      .eyebrow {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--teal);
+        text-align: center;
+        margin: 0 0 8px;
+      }
+
+      h1 {
+        font-family: "Fraunces", serif;
+        font-weight: 600;
+        font-size: clamp(22px, 2.6vw, 30px);
+        text-align: center;
+        margin: 0 0 6px;
+        letter-spacing: -0.01em;
+      }
+
+      .subtitle {
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 13px;
+        max-width: 680px;
+        margin: 0 auto 18px;
+        line-height: 1.45;
+        font-style: italic;
+        font-family: "Fraunces", serif;
+      }
+
+      .panel {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 12px 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 22px;
+        flex-wrap: wrap;
+        margin-bottom: 12px;
+      }
+
+      .field label {
+        display: block;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-bottom: 6px;
+      }
+
+      .field input {
+        width: 90px;
+        padding: 9px 10px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 15px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 3px;
+        color: var(--text);
+      }
+
+      .field input:focus {
+        outline: none;
+        border-color: var(--teal);
+      }
+
+      button {
+        padding: 9px 20px;
+        margin-top: 0;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        background: var(--gold);
+        color: #17263a;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        font-weight: 600;
+        align-self: flex-end;
+      }
+
+      button:hover {
+        background: #d9b665;
+      }
+
+      .stat-line {
+        text-align: center;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        color: var(--text-muted);
+        margin-bottom: 12px;
+        min-height: 14px;
+      }
+
+      .stat-line strong {
+        color: var(--teal);
+        font-weight: 600;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        overflow: hidden;
+        table-layout: fixed;
+      }
+
+      thead th {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10.5px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--bg);
+        background: var(--gold);
+        text-align: left;
+        padding: 9px 14px;
+      }
+
+      thead th:first-child {
+        padding-left: 34px;
+        width: 64px;
+      }
+
+      thead th:nth-child(2),
+      thead th:nth-child(3) {
+        width: 12%;
+      }
+
+      thead th:nth-child(4) {
+        width: 18%;
+      }
+
+      tbody {
+        position: relative;
+      }
+
+      tbody::before {
+        content: "";
+        position: absolute;
+        left: 17px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(var(--gold-dim), var(--gold-dim) 100%);
+      }
+
+      tbody tr td {
+        padding: 8px 14px;
+        border-top: 1px solid var(--border);
+        font-size: 12.5px;
+        line-height: 1.42;
+        vertical-align: top;
+      }
+
+      tbody tr:nth-child(odd) {
+        background: var(--panel-2);
+      }
+
+      tbody td:first-child {
+        position: relative;
+        padding-left: 34px;
+        font-family: "IBM Plex Mono", monospace;
+        color: var(--teal);
+        font-weight: 500;
+        white-space: nowrap;
+      }
+
+      tbody td:first-child::before {
+        content: "";
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--teal);
+        box-shadow: 0 0 0 3px rgba(95, 195, 184, 0.22);
+      }
+
+      td.countries {
+        font-family: "Fraunces", serif;
+        font-weight: 600;
+        font-size: 13.5px;
+        color: var(--text);
+        white-space: nowrap;
+      }
+
+      td.dimension {
+        color: var(--gold);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.02em;
+      }
+
+      td.scenario {
+        color: var(--text);
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        tbody tr {
+          animation: rise 0.28s ease backwards;
+        }
+      }
+
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(4px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 520px) {
+        .panel {
+          flex-direction: column;
+        }
+        .card {
+          padding-left: 36px;
+        }
+        .card::before {
+          left: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <p class="eyebrow">IST 305 · Globalism, IT &amp; Culture</p>
+      <h1>The Culture Map — team scenarios</h1>
+      <p class="subtitle">
+        Each card pairs a country for Management with a different country for
+        Software Development, plus a friction point drawn from one of Erin
+        Meyer's eight cultural scales. Discuss what's driving the
+        misunderstanding and how each side could adapt.
+      </p>
+
+      <div class="panel">
+        <div class="field">
+          <label for="teamCount">Teams to display</label>
+          <input
+            type="number"
+            id="teamCount"
+            name="teamCount"
+            value="10"
+            min="1"
+            max="10"
+          />
+        </div>
+        <button onclick="generateTeams()">Shuffle teams</button>
+      </div>
+
+      <p class="stat-line" id="statLine"></p>
+
+      <table id="teamsTable">
+        <thead>
+          <tr>
+            <th>Team</th>
+            <th>Management</th>
+            <th>Developers</th>
+            <th>Dimension</th>
+            <th>Scenario</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+
+    <script>
+      const teams = [
+        {
+          management: "Germany",
+          developers: "India",
+          dimension: "Evaluating — direct vs. indirect feedback",
+          scenario:
+            "The German engineering manager leaves blunt, unfiltered comments on pull requests — 'This approach is wrong, redo it' — expecting developers to read it as helpful precision. The Indian developers experience the same comments as harsh and personal, and morale on the team is dropping.",
+        },
+        {
+          management: "USA",
+          developers: "Japan",
+          dimension: "Communicating — low-context vs. high-context",
+          scenario:
+            "In sprint retros, the American product manager asks direct yes/no questions and expects candid answers on the spot. The Japanese engineers give vague, qualified responses and rarely disagree openly, leaving the manager unsure whether real problems are being hidden.",
+        },
+        {
+          management: "France",
+          developers: "Korea",
+          dimension: "Disagreeing — confrontational vs. avoids confrontation",
+          scenario:
+            "The French tech lead enjoys vigorous debate in design reviews and treats pushback as a sign of engagement. The Korean developers experience the open challenges as disrespectful toward a senior colleague and have started staying quiet rather than object.",
+        },
+        {
+          management: "Korea",
+          developers: "USA",
+          dimension: "Leading — hierarchical vs. egalitarian",
+          scenario:
+            "The Korean director expects requests to move up the chain and decisions to come from the top. The American developers are used to going straight to whoever can answer their question, and have started emailing the director's own boss directly — which the director reads as going over his head.",
+        },
+        {
+          management: "Japan",
+          developers: "Germany",
+          dimension: "Deciding — consensual vs. top-down",
+          scenario:
+            "The Japanese manager wants to build consensus by quietly circulating a proposal to every stakeholder before committing to anything, a process that takes weeks. The German developers see this as slow and unclear, and just want a decision memo with a firm date attached.",
+        },
+        {
+          management: "Vietnam",
+          developers: "Germany",
+          dimension: "Scheduling — flexible-time vs. linear-time",
+          scenario:
+            "The Vietnamese manager treats the sprint plan as a rough guide and reshuffles priorities mid-week based on what feels urgent. The German developers built their whole week around the original plan and feel the constant changes make it impossible to do careful work.",
+        },
+        {
+          management: "India",
+          developers: "USA",
+          dimension: "Trusting — relationship-based vs. task-based",
+          scenario:
+            "The Indian manager schedules informal calls to check in on developers' families and wellbeing before getting to project updates, seeing this as how trust is built. The American developers find the calls unnecessary and want status updates to stay quick and purely task-focused.",
+        },
+        {
+          management: "Vietnam",
+          developers: "USA",
+          dimension: "Trusting — relationship-based vs. task-based",
+          scenario:
+            "The Vietnamese manager likes to build rapport over long lunches and personal conversation before ever getting to a request, treating the relationship-building as a necessary first step. The American developers want to skip straight to the ask, and quietly wonder when the meeting is going to get to the point.",
+        },
+        {
+          management: "Korea",
+          developers: "France",
+          dimension: "Evaluating — indirect vs. direct feedback",
+          scenario:
+            "The Korean manager wraps feedback in praise and softened language, expecting the real message to be read between the lines. The French developers take the feedback at face value, assume everything is fine, and are blindsided when a performance issue surfaces later.",
+        },
+        {
+          management: "Vietnam",
+          developers: "Japan",
+          dimension: "Scheduling — flexible-time vs. linear-time",
+          scenario:
+            "The Vietnamese manager changes the release date twice in one week without much notice, comfortable adapting as things come up. The Japanese developers had built a precise, sequenced plan around the original date and are unsettled by the last-minute shifts.",
+        },
+      ];
+
+      function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+      }
+
+      function generateTeams() {
+        const teamCountInput = document.getElementById("teamCount");
+        let teamCount = parseInt(teamCountInput.value, 10);
+
+        if (isNaN(teamCount) || teamCount < 1) {
+          alert("Please enter a valid number greater than 0.");
+          return;
+        }
+        if (teamCount > teams.length) {
+          teamCount = teams.length;
+          teamCountInput.value = teamCount;
+        }
+
+        const shuffled = [...teams];
+        shuffleArray(shuffled);
+        const selected = shuffled.slice(0, teamCount);
+
+        document.getElementById("statLine").innerHTML = `<strong>${
+          selected.length
+        }</strong> team${selected.length === 1 ? "" : "s"} drawn from <strong>${
+          teams.length
+        }</strong> scenarios`;
+
+        displayTeams(selected);
+      }
+
+      function displayTeams(selected) {
+        const tableBody = document.getElementById("tableBody");
+        tableBody.innerHTML = "";
+
+        selected.forEach((team, index) => {
+          const row = document.createElement("tr");
+          row.style.animationDelay = `${index * 0.03}s`;
+
+          row.innerHTML = `
+            <td>${String(index + 1).padStart(2, "0")}</td>
+            <td class="countries">${team.management}</td>
+            <td class="countries">${team.developers}</td>
+            <td class="dimension">${team.dimension}</td>
+            <td class="scenario">${team.scenario}</td>
+          `;
+
+          tableBody.appendChild(row);
+        });
+      }
+
+      generateTeams();
+    </script>
+  </body>
+</html>
