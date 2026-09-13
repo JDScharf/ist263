@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Culture Map — USA Pairings</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0b1e2d;
+        --panel: #122a3c;
+        --panel-2: #16334a;
+        --gold: #c9a24b;
+        --gold-dim: rgba(201, 162, 75, 0.35);
+        --teal: #5fc3b8;
+        --text: #ece5d3;
+        --text-muted: #8ea3af;
+        --border: rgba(201, 162, 75, 0.28);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: var(--bg);
+        color: var(--text);
+        font-family: "IBM Plex Sans", sans-serif;
+        background-image: repeating-linear-gradient(
+            0deg,
+            transparent 0,
+            transparent 79px,
+            rgba(201, 162, 75, 0.055) 80px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            transparent 0,
+            transparent 79px,
+            rgba(201, 162, 75, 0.055) 80px
+          ),
+          radial-gradient(
+            circle at 82% -6%,
+            rgba(95, 195, 184, 0.16),
+            transparent 42%
+          );
+      }
+
+      .wrap {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 40px 24px 60px;
+      }
+
+      .eyebrow {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--teal);
+        text-align: center;
+        margin: 0 0 8px;
+      }
+
+      h1 {
+        font-family: "Fraunces", serif;
+        font-weight: 600;
+        font-size: clamp(26px, 3.6vw, 36px);
+        text-align: center;
+        margin: 0 0 8px;
+        letter-spacing: -0.01em;
+      }
+
+      .subtitle {
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 14px;
+        max-width: 480px;
+        margin: 0 auto 24px;
+        line-height: 1.5;
+        font-style: italic;
+        font-family: "Fraunces", serif;
+      }
+
+      .panel {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 16px 26px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 22px;
+        flex-wrap: wrap;
+        margin-bottom: 16px;
+      }
+
+      .field label {
+        display: block;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-bottom: 6px;
+      }
+
+      .field input {
+        width: 90px;
+        padding: 9px 10px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 15px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 3px;
+        color: var(--text);
+      }
+
+      .field input:focus {
+        outline: none;
+        border-color: var(--teal);
+      }
+
+      button {
+        padding: 10px 22px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        background: var(--gold);
+        color: #17263a;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        font-weight: 600;
+        align-self: flex-end;
+      }
+
+      button:hover {
+        background: #d9b665;
+      }
+
+      .stat-line {
+        text-align: center;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        color: var(--text-muted);
+        margin-bottom: 22px;
+        min-height: 16px;
+      }
+
+      .stat-line strong {
+        color: var(--teal);
+        font-weight: 600;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        overflow: hidden;
+      }
+
+      thead th {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--bg);
+        background: var(--gold);
+        text-align: left;
+        padding: 12px 18px;
+      }
+
+      thead th:first-child {
+        padding-left: 46px;
+        width: 90px;
+      }
+
+      tbody {
+        position: relative;
+      }
+
+      tbody::before {
+        content: "";
+        position: absolute;
+        left: 23px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(var(--gold-dim), var(--gold-dim) 100%);
+      }
+
+      tbody tr td {
+        padding: 13px 18px;
+        border-top: 1px solid var(--border);
+        font-size: 14.5px;
+      }
+
+      tbody tr:nth-child(odd) {
+        background: var(--panel-2);
+      }
+
+      tbody td:first-child {
+        position: relative;
+        padding-left: 46px;
+        font-family: "IBM Plex Mono", monospace;
+        color: var(--teal);
+        font-weight: 500;
+        white-space: nowrap;
+      }
+
+      tbody td:first-child::before {
+        content: "";
+        position: absolute;
+        left: 18px;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--teal);
+        box-shadow: 0 0 0 4px rgba(95, 195, 184, 0.22);
+      }
+
+      tbody td:not(:first-child) {
+        font-family: "Fraunces", serif;
+        font-weight: 600;
+        color: var(--text);
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        tbody tr {
+          animation: rise 0.32s ease backwards;
+        }
+      }
+
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(4px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 520px) {
+        .panel {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <p class="eyebrow">IST 305 · Globalism, IT &amp; Culture</p>
+      <h1>USA team pairings</h1>
+      <p class="subtitle">
+        Every group has one side based in the USA and the other side in a
+        different country. Discuss what cultural friction might arise for each
+        pairing.
+      </p>
+
+      <div class="panel">
+        <div class="field">
+          <label for="teamCount">Groups to display</label>
+          <input
+            type="number"
+            id="teamCount"
+            name="teamCount"
+            value="10"
+            min="1"
+            max="12"
+          />
+        </div>
+        <button onclick="generateTeams()">Shuffle groups</button>
+      </div>
+
+      <p class="stat-line" id="statLine"></p>
+
+      <table id="teamsTable">
+        <thead>
+          <tr>
+            <th>Group</th>
+            <th>Management</th>
+            <th>Software Developers</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+
+    <script>
+      const otherCountries = [
+        "India",
+        "Germany",
+        "Japan",
+        "Vietnam",
+        "Korea",
+        "France",
+      ];
+
+      function buildPairPool() {
+        const pool = [];
+        otherCountries.forEach((country) => {
+          pool.push({ management: "USA", developers: country });
+          pool.push({ management: country, developers: "USA" });
+        });
+        return pool;
+      }
+
+      function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+      }
+
+      function generateTeams() {
+        const teamCountInput = document.getElementById("teamCount");
+        const pool = buildPairPool();
+        let teamCount = parseInt(teamCountInput.value, 10);
+
+        if (isNaN(teamCount) || teamCount < 1) {
+          alert("Please enter a valid number greater than 0.");
+          return;
+        }
+        if (teamCount > pool.length) {
+          teamCount = pool.length;
+          teamCountInput.value = teamCount;
+        }
+
+        shuffleArray(pool);
+        const selected = pool.slice(0, teamCount);
+
+        document.getElementById("statLine").innerHTML = `<strong>${
+          selected.length
+        }</strong> group${
+          selected.length === 1 ? "" : "s"
+        } paired with the USA`;
+
+        displayTeams(selected);
+      }
+
+      function displayTeams(selected) {
+        const tableBody = document.getElementById("tableBody");
+        tableBody.innerHTML = "";
+
+        selected.forEach((team, index) => {
+          const row = document.createElement("tr");
+          row.style.animationDelay = `${index * 0.04}s`;
+
+          row.innerHTML = `
+            <td>Group ${String(index + 1).padStart(2, "0")}</td>
+            <td>${team.management}</td>
+            <td>${team.developers}</td>
+          `;
+
+          tableBody.appendChild(row);
+        });
+      }
+
+      generateTeams();
+    </script>
+  </body>
+</html>
